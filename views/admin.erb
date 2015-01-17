@@ -1,0 +1,48 @@
+<!DOCKTYPE html>
+
+<html>
+  <head>
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/blitzer/jquery-ui.css">
+    <script>
+      $(function() {
+            $( ".datepicker" ).datepicker();
+              });
+        </script>
+  </head>
+<body>
+<p>관리자 페이지 입니다.</p>
+<ul>
+<% @users.each do |x| %>
+  <li> 
+    <%= x.user_email %>, <%= x.user_password %>
+    <a href="/user_delete/<%= x.id %>">[x] </a>
+  </li>
+<% end %>
+</ul>
+  <p> 호텔을 추가 하겠습니까?</p>
+    <form action="/add_hotel" method="POST">
+    <p>호텔이름 <input type="text" name="hotel_title"></p>
+    <p>호텔설명 <input type="text" name="hotel_description"></p>
+    <p>호텔사진파일 위치 <input type="text" name="hotel_image_location"></p>
+    <p>호텔 예약 가능 날짜 시작 <input type="text" name="hotel_start" class="datepicker"></p>
+    <p>호텔 예약 가능 날짜 끝 <input type="text" name="hotel_end" class="datepicker"></p>
+    <p>하루 투숙 가능 인원 <input type="text" name="hotel_size"></p>
+    <input type="submit" value="전송">
+    </form>
+    <h1> 호텔 예약 내역 </h1>
+    <% @hotels.each do |h| %>
+      <p><%= h.title %></p>
+      <% h.tickets.each do |y| %>
+        <% u = User.first(:id => y.user_id) %>
+        <p>
+        <% if !u.nil? %>
+        <%= u.user_email %>,
+      <% end %>
+        <%= y.user_id %>, <%= y.reservation_date %></p>
+      <% end %>
+    <% end %>
+</body>
+</html>

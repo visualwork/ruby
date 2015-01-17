@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+ 
+   <%= erb :navi %>
+   <% if !session[:email].nil? %>
+   <%= @email_name %> 님이 로그인 하셨습니다.
+   <a href="/logout">로그아웃</a>
+   <% end %>
+    <div class="row">
+      <% @hotels.each do |h| %>
+      <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+          <div class="media">
+            <a class="pull-left" href="/detail/<%= h.id%>">
+              <img class="media-object" src="<%=h.image_src %>" alt="...">
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading"><%= h.title %></h4>
+              <p><%= h.description %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+	<%=erb :footer %>
+  </body>
+</html>

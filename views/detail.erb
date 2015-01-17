@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/blitzer/jquery-ui.css">
+      <script>
+        $(function() {
+          $( "#start_date" ).datepicker();
+          $( "#end_date" ).datepicker();
+                });
+       </script>
+  </head>
+  <body>
+
+<%= erb :navi %>
+<div class="row">
+      <div class="col-md-8 col-md-offset-2">
+         <div class="well">
+           <div class="media">
+              <img class="media-object" src="<%=@hotel.image_src %>" alt="...">
+              <div class="media-body">
+          <h4 class="media-heading"><%= @hotel.title %></h4>
+        <p><%= @hotel.description %></p>
+        <p><%= @hotel.start_at %>부터 <%= @hotel.end_at %>까지 예약 가능합니다.</p>
+      </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="row">
+ <div class="col-md-8 col-md-offset-2">
+ <div class="well">
+ <form action="/reservation" method="POST">
+  Start Date: <input type="text" name="start_date"  class="date_input" id="start_date">&nbsp;&nbsp;
+  End Date: <input type="text" name="end_date" class="date_input" id="end_date">
+  <input type="hidden" name="hotel_id" value= "<%= @hotel.id %>" >
+  <input type="submit" value="예약하기">
+  </form>
+  </div>
+ </div>
+ </div>
+  <%= erb :footer %>
+  </body>
+</html>
+

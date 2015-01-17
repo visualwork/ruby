@@ -1,0 +1,17 @@
+<h1> 이메일 보내는 페이지 입니다. </h1>
+<form action="/send_simple_message" method="post">
+  <p>
+   <label>받는이</label>
+  <input type="text" name="email_recv">
+  </p>
+  <p>
+   <label>제목</label>
+  <input type="text" name="email_title">
+  </p>
+  <p>
+   <label>내용</label>
+  <textarea name="email_content">
+  </textarea>
+  </p>
+  <input type="submit" value="전송">
+</form>
